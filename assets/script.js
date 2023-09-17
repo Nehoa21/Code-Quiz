@@ -12,6 +12,11 @@
 // WHEN the game is over
 // THEN I can save my initials and my score
 
+var startBtn = document.getElementById("start-btn");
+var showTimer = document.getElementById("timer");
+
+
+
 // questions and answers
 var questions = [
   {
@@ -61,33 +66,69 @@ var questions = [
   }
 ];
 
-var correct = true;
-var timerCount = 75;
+var currentQIndex = 0;
+var timerCount = 0;
+var timer;
+var timerCount;
 
 // start game when start button pushed
-function startGame() {
-
+function startQuiz() {
+  currentQIndex = 0;
+  // showTimer.textContent = 75;
+  startBtn.disabled = true;
+  showQuestion();
+  startTimer();
 }
+
+function showQuestion() {
+  resetState();
+  var currentQ = questions[currentQIndex];
+  var questionN = currentQIndex + 1;
+  questionEl.innerHTML = questionN + ". " + currentQ.question;
+
+  currentQ.answers.forEach(answer => {
+    var button = document.createElement("button");
+    button.innerHTML = answer.text;
+    button.classList.add("btn");
+    answerButton.appendChild(button);
+    button.addEventListener('click')
+  });
+}
+
+function resetState() {
+  
+}
+
+
+
+
+
 
 // timer function
 function startTimer() {
-    // Sets timer
-    timer = setInterval(function() {
-      timerCount--;
-      timerElement.textContent = timerCount;
-      if (timerCount >= 0) {
-        // Tests if win condition is met
-        if (isWin && timerCount > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          winGame();
-        }
-      }
-      // Tests if time has run out
-      if (timerCount === 0) {
-        // Clears interval
+  // Sets timer
+  timer = setInterval(function() {
+    timerCount = showTimer.timerCount;
+    timerCount--;
+    showTimer.textContent = timerCount;
+    if (timerCount >= 0) {
+      // Tests if win condition is met
+      if (isWin && timerCount > 0) {
+        // Clears interval and stops timer
         clearInterval(timer);
-        loseGame();
+        winGame();
       }
-    }, 1000);
+    }
+    // Tests if time has run out
+    if (timerCount === 0) {
+      // Clears interval
+      clearInterval(timer);
+      loseGame();
+    }
+  }, 1000);
 }
+
+startBtn.addEventListener("click", startQuiz());
+
+startQuiz();
+

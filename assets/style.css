@@ -19,17 +19,17 @@ p {
     font-size: large;
 }
 
-.highscores {
+#highscores {
     float: left;
     font-size: 20px;
 }
 
-.timer {
+#timer {
     float: right;
     font-size: 20px;
 }
 
-.start-btn {
+#start-btn {
     background-color: blueviolet;
     font-size: 18px;
     font-weight: bold;
@@ -37,3 +37,4 @@ p {
     border-radius: 8px;
     cursor: pointer;
 }
+
