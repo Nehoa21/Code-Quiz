@@ -12,11 +12,47 @@
 // WHEN the game is over
 // THEN I can save my initials and my score
 
+// questions
+var q1 = "";
+var q2 = "";
+var q3 = "";
+var q4 = "";
+var q5 = "";
 
+// answers
+var answers1 = ["", "", "", ""];
+var amswers2 = ["", "", "", ""];
+var answers3 = ["", "", "", ""];
+var answers4 = ["", "", "", ""];
+var answers5 = ["", "", "", ""];
 
+var correct = true;
+var timerCount = 75;
 
+// start game when start button pushed
+function startGame() {
 
+}
 
+function question1() {
+
+}
+
+function question2() {
+
+}
+
+function question3() {
+
+}
+
+function question4() {
+
+}
+
+function question5() {
+
+}
 
 
 
@@ -41,4 +77,4 @@ function startTimer() {
         loseGame();
       }
     }, 1000);
-  }
+}
