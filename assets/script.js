@@ -13,7 +13,11 @@
 // THEN I can save my initials and my score
 
 // questions
-var q1 = "";
+var questions = [
+  {
+    question: ""
+  }
+]
 var q2 = "";
 var q3 = "";
 var q4 = "";
@@ -33,28 +37,6 @@ var timerCount = 75;
 function startGame() {
 
 }
-
-function question1() {
-
-}
-
-function question2() {
-
-}
-
-function question3() {
-
-}
-
-function question4() {
-
-}
-
-function question5() {
-
-}
-
-
 
 // timer function
 function startTimer() {
