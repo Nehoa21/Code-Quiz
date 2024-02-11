@@ -7,10 +7,10 @@ const questions = document.querySelector('#questions');
 const answers = document.querySelector('#answers');
 const correct = document.querySelector('#correct');
 const wrong = document.querySelector('#wrong');
-const highscoresEntry = document.querySelector('.highscores-entry');
-const earnedScore = document.querySelector('.earned-score');
+const highscoreEntry = document.querySelector('.highscore-entry');
+const earnedScore = document.querySelector('#earned-score');
 const userInitials = document.querySelector('#user-initials');
-const highscoresDisplay = document.querySelector('highscores-display');
+const highscoresList = document.querySelector('#highscores-list');
 const list = document.querySelector('#list');
 const submit = document.querySelector('#submit');
 
@@ -91,7 +91,7 @@ function startTimer() {
 
     if (timerCount === 0) {
       questionSection.hidden = true;
-      highscoresEntry.hidden = false;
+      highscoreEntry.hidden = false;
       earnedScore.textContent = timerCount;
       timerSection.hidden = true;
       clearInterval(timer);
@@ -101,8 +101,8 @@ function startTimer() {
 
 // Show Questions
 function showQuestion() {
-  questionSection.textContent = questionList[currentQ].question;
-  questions.innerHTML = "";
+  questions.textContent = questionList[currentQ].question;
+  answers.innerHTML = "";
   for (let i = 0; i < questionList[currentQ].choices.length; i++) {
     let button = document.createElement('button');
     button.textContent = questionList[currentQ].choices[i];
@@ -136,7 +136,7 @@ function showAnswer(event) {
     showQuestion();
   } else {
     questionSection.hidden = true;
-    highscoresEntry.hidden = false;
+    highscoreEntry.hidden = false;
     earnedScore.textContent = timerCount;
     timerSection.hidden = true;
     clearInterval(timer);
@@ -147,7 +147,7 @@ function showAnswer(event) {
 submit.addEventListener('click', function(event) {
   event.preventDefault();
   
-  let initials = userInitials.ariaValueMax;
+  let initials = userInitials.value;
   let finalScore = timerCount;
   const topScores = JSON.parse(localStorage.getItem('list')) || [];
   let score = {
@@ -156,20 +156,20 @@ submit.addEventListener('click', function(event) {
   };
   topScores.push(score);
   localStorage.setItem('list', JSON.stringify(topScores));
-  highscoresEntry.hidden = true;
+  highscoreEntry.hidden = true;
   showHighscores();
 });
 
 // Show top score list
 function showHighscores() {
-  highscoresDisplay.hidden = false;
+  highscoresList.hidden = false;
   const topScores = JSON.parse(localStorage.getItem('list'));
   topScores.forEach(score => {
     let li = document.createElement('li');
-    li.textContent = JSON.stringify(score);
+    li.textContent = JSON.stringify(score, null, 2);
     list.appendChild(li);
   });
 }
 
 // Run start quiz function when Start Quiz button clicked
-startBtn.addEventListener("click", startQuiz());
+startBtn.addEventListener("click", startQuiz);
