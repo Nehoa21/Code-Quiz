@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Code Quiz</title>
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
     <header>
         <!-- view highscores -->
-        <div>
-            <text id="highscores">View Highscores</text>
+        <div id="highscores">
+            View Highscores
         </div>
         <!-- timer -->
-        <div>
-            <text id="timer">
-                
-            </text>
+        <div id="timer">
+            75
         </div>
     </header>
 
@@ -32,6 +30,30 @@
         <button id="start-btn">
             Start Quiz
         </button>
+
+        <!-- Questions -->
+        <div class="question-box" hidden>
+            <div id="questions"></div>
+            <div id="answers"></div>
+
+            <div class="correct">Correct!</div>
+            <div class="wrong">Wrong! -10 seconds</div>
+        </div>
+
+        <!-- Enter initials -->
+        <div class="highscore-entry" hidden>
+            <h3>Done!</h3>
+            <p>Your score is <span id="earned-score"></span></p>
+            <p>Enter initials to save your score!</p>
+            <input id="initials"><button id="submit">Submit</button>
+        </div>
+
+        <!-- Highscores -->
+        <div class="highscores" hidden>
+            <h3>Scores</h3>
+            <div id="highscores-display"></div>
+            <ul id="list"></ul>
+        </div>
     </main>
 
 

@@ -21,48 +21,53 @@ var showTimer = document.getElementById("timer");
 var questions = [
   {
     question: "Commonly used datatypes DO NOT include:",
-    answers: [
-      {text: "1. Strings", correct: false},
-      {text: "2. Booleans", correct: false},
-      {text: "3. Alerts", correct: false},
-      {text: "4. Numbers", correct: false}
-    ]
+    choices: [
+      "1. Strings",
+      "2. Booleans",
+      "3. Alerts",
+      "4. Numbers"
+    ],
+    answer: "3. Alerts"
   },
   {
     question: "The condition in an if / else statement is enclosed with:",
-    answers: [
-      {text: "1. Quotes", correct: false},
-      {text: "2. Curly brackets", correct: false},
-      {text: "3. Parentheses", correct: false},
-      {text: "4. Square brackets", correct: false}
-    ]
+    choices: [
+      "1. Quotes",
+      "2. Curly brackets",
+      "3. Parentheses",
+      "4. Square brackets"
+    ],
+    answer: "3. Parentheses"
   },
   {
     question: "Arrays in Javascript can be used to store ____.:",
-    answers: [
-      {text: "1. numbers and strings", correct: false},
-      {text: "2. other arrays", correct: false},
-      {text: "3. booleans", correct: false},
-      {text: "4. all of the above", correct: false}
-    ]
+    choices: [
+      "1. numbers and strings",
+      "2. other arrays",
+      "3. booleans",
+      "4. all of the above"
+    ],
+    answer: "1. numbers and strings"
   },
   {
     question: "String values must be enclosed within ____ when being assigned to variables.",
-    answers: [
-      {text: "1. commas", correct: false},
-      {text: "2. curly brackets", correct: false},
-      {text: "3. quotes", correct: false},
-      {text: "4. parentheses", correct: false}
-    ]
+    choices: [
+      "1. commas",
+      "2. curly brackets",
+      "3. quotes",
+      "4. parentheses"
+    ],
+    answer: "3. quotes"
   },
   {
     question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-    answers: [
-      {text: "1. Javascript", correct: false},
-      {text: "2. Terminal/bash", correct: false},
-      {text: "3. for loops", correct: false},
-      {text: "4. Console log", correct: false}
-    ]
+    choices: [
+      "1. Javascript",
+      "2. Terminal/bash",
+      "3. for loops",
+      "4. Console log"
+    ],
+    answer: "4. Console log"
   }
 ];
 
