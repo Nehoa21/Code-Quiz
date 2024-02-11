@@ -11,7 +11,10 @@ Here is a simple quiz about coding that will run through 5 questions with a 75 s
 
 ## Usage
 
-Click on the `Start Quiz` button to begin the quiz. Click on the `View Highscores` button to see the top scores.
+Click on the `Start Quiz` button to begin the quiz. Click on the `View Highscores` button to see the top scores. Click thos link to take the quiz!
+- [Code Quiz](https://nehoa21.github.io/Code-Quiz/)
+
+![Code Quiz Screenshot](./assets/images/Code%20Quiz%20screenshot.png)
 
 ## License
 
