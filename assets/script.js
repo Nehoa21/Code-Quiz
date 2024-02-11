@@ -1,20 +1,21 @@
 // Bring in elements
-var startBtn = document.querySelector("#start-btn");
-var timerSection = document.querySelector("#timer");
-var intro = document.querySelector("#intro");
-var questionSection = document.querySelector(".question-box");
-var questions = document.querySelector('#questions');
-var answers = document.querySelector('#answers');
-var correct = document.querySelector('#correct');
-var wrong = document.querySelector('#wrong');
-var highscoresEntry = document.querySelector('.highscores-entry');
-var earnedScore = document.querySelector('.earned-score');
-var initials = document.querySelector('#initials');
-var highscoresDisplay = document.querySelector('highscores-display');
-var list = document.querySelector('#list');
+const startBtn = document.querySelector("#start-btn");
+const timerSection = document.querySelector("#timer");
+const intro = document.querySelector("#intro");
+const questionSection = document.querySelector(".question-box");
+const questions = document.querySelector('#questions');
+const answers = document.querySelector('#answers');
+const correct = document.querySelector('#correct');
+const wrong = document.querySelector('#wrong');
+const highscoresEntry = document.querySelector('.highscores-entry');
+const earnedScore = document.querySelector('.earned-score');
+const userInitials = document.querySelector('#user-initials');
+const highscoresDisplay = document.querySelector('highscores-display');
+const list = document.querySelector('#list');
+const submit = document.querySelector('#submit');
 
 // questions and answers
-var questionList = [
+let questionList = [
   {
     question: "Commonly used datatypes DO NOT include:",
     choices: [
@@ -68,9 +69,9 @@ var questionList = [
 ];
 
 // Set up some variables
-var timer;
-var timerCount = 75;
-var currentQIndex = 0;
+let timer;
+let timerCount = 75;
+let currentQ = 0;
 
 // Start game function
 function startQuiz() {
@@ -98,33 +99,77 @@ function startTimer() {
   }, 1000);
 }
 
+// Show Questions
 function showQuestion() {
-  resetState();
-  var currentQ = questionList[currentQIndex];
-  var questionN = currentQIndex + 1;
-  questionEl.innerHTML = questionN + ". " + currentQ.question;
+  questionSection.textContent = questionList[currentQ].question;
+  questions.innerHTML = "";
+  for (let i = 0; i < questionList[currentQ].choices.length; i++) {
+    let button = document.createElement('button');
+    button.textContent = questionList[currentQ].choices[i];
+    button.onclick = showAnswer;
 
-  currentQ.answers.forEach(answer => {
-    var button = document.createElement("button");
-    button.innerHTML = answer.text;
-    button.classList.add("btn");
-    answerButton.appendChild(button);
-    button.addEventListener('click')
+    answers.appendChild(button);
+  }
+}
+
+// Show Answers
+function showAnswer(event) {
+  let correctAnswer = questionList[currentQ].answer;
+  let userAnswer = event.target.textContent
+
+  // determine if answer is correct
+  if (userAnswer === correctAnswer) {
+    correct.hidden = false;
+  } else {
+    wrong.hidden = false;
+    timerCount -= 10;
+  }
+
+  setTimeout(function() {
+    correct.hidden = true;
+    wrong.hidden = true;
+  }, 1500);
+
+  // determine if more questions or end of quiz
+  if (currentQ < questionList.length-1) {
+    currentQ++;
+    showQuestion();
+  } else {
+    questionSection.hidden = true;
+    highscoresEntry.hidden = false;
+    earnedScore.textContent = timerCount;
+    timerSection.hidden = true;
+    clearInterval(timer);
+  }
+}
+
+// Submit user top score
+submit.addEventListener('click', function(event) {
+  event.preventDefault();
+  
+  let initials = userInitials.ariaValueMax;
+  let finalScore = timerCount;
+  const topScores = JSON.parse(localStorage.getItem('list')) || [];
+  let score = {
+    name: initials,
+    score: finalScore
+  };
+  topScores.push(score);
+  localStorage.setItem('list', JSON.stringify(topScores));
+  highscoresEntry.hidden = true;
+  showHighscores();
+});
+
+// Show top score list
+function showHighscores() {
+  highscoresDisplay.hidden = false;
+  const topScores = JSON.parse(localStorage.getItem('list'));
+  topScores.forEach(score => {
+    let li = document.createElement('li');
+    li.textContent = JSON.stringify(score);
+    list.appendChild(li);
   });
 }
 
-function resetState() {
-  
-}
-
-
-
-
-
-
-
-
+// Run start quiz function when Start Quiz button clicked
 startBtn.addEventListener("click", startQuiz());
-
-startQuiz();
-
