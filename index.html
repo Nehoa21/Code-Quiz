@@ -19,25 +19,27 @@
     </header>
 
     <main>
-        <h1>
-            Coding Quiz Challenge
-        </h1>
-        <div>
-             <p>
+        <!-- Intro -->
+        <div id="intro">
+            <h1>
+                Coding Quiz Challenge
+            </h1>
+            <p>
             Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!
             </p>
+            <button id="start-btn">
+                Start Quiz
+            </button>
         </div>
-        <button id="start-btn">
-            Start Quiz
-        </button>
+        
 
         <!-- Questions -->
         <div class="question-box" hidden>
             <div id="questions"></div>
             <div id="answers"></div>
 
-            <div class="correct">Correct!</div>
-            <div class="wrong">Wrong! -10 seconds</div>
+            <div id="correct">Correct!</div>
+            <div id="wrong">Wrong! -10 seconds</div>
         </div>
 
         <!-- Enter initials -->
@@ -49,20 +51,12 @@
         </div>
 
         <!-- Highscores -->
-        <div class="highscores" hidden>
+        <div class="highscores-list" hidden>
             <h3>Scores</h3>
             <div id="highscores-display"></div>
             <ul id="list"></ul>
         </div>
     </main>
-
-
-
-
-
-
-
-
     <script src="./assets/script.js"></script>
 </body>
 </html>

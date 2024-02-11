@@ -1,24 +1,20 @@
-// start timer when start button pushed
-// function to get questions
-// WHEN I answer a question
-// THEN I am presented with another question
-
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-
-// WHEN the game is over
-// THEN I can save my initials and my score
-
-var startBtn = document.getElementById("start-btn");
-var showTimer = document.getElementById("timer");
-
-
+// Bring in elements
+var startBtn = document.querySelector("#start-btn");
+var timerSection = document.querySelector("#timer");
+var intro = document.querySelector("#intro");
+var questionSection = document.querySelector(".question-box");
+var questions = document.querySelector('#questions');
+var answers = document.querySelector('#answers');
+var correct = document.querySelector('#correct');
+var wrong = document.querySelector('#wrong');
+var highscoresEntry = document.querySelector('.highscores-entry');
+var earnedScore = document.querySelector('.earned-score');
+var initials = document.querySelector('#initials');
+var highscoresDisplay = document.querySelector('highscores-display');
+var list = document.querySelector('#list');
 
 // questions and answers
-var questions = [
+var questionList = [
   {
     question: "Commonly used datatypes DO NOT include:",
     choices: [
@@ -71,23 +67,40 @@ var questions = [
   }
 ];
 
-var currentQIndex = 0;
-var timerCount = 0;
+// Set up some variables
 var timer;
-var timerCount;
+var timerCount = 75;
+var currentQIndex = 0;
 
-// start game when start button pushed
+// Start game function
 function startQuiz() {
-  currentQIndex = 0;
-  // showTimer.textContent = 75;
-  startBtn.disabled = true;
+  intro.hidden = true;
+  questionSection.hidden = false;
   showQuestion();
   startTimer();
 }
 
+// Timer function
+function startTimer() {
+  timer = setInterval(function() {
+    if (timerCount >= 0) {
+      timerSection.textContent = timerCount;
+      timerCount--;
+    }
+
+    if (timerCount === 0) {
+      questionSection.hidden = true;
+      highscoresEntry.hidden = false;
+      earnedScore.textContent = timerCount;
+      timerSection.hidden = true;
+      clearInterval(timer);
+    }
+  }, 1000);
+}
+
 function showQuestion() {
   resetState();
-  var currentQ = questions[currentQIndex];
+  var currentQ = questionList[currentQIndex];
   var questionN = currentQIndex + 1;
   questionEl.innerHTML = questionN + ". " + currentQ.question;
 
@@ -109,29 +122,7 @@ function resetState() {
 
 
 
-// timer function
-function startTimer() {
-  // Sets timer
-  timer = setInterval(function() {
-    timerCount = showTimer.timerCount;
-    timerCount--;
-    showTimer.textContent = timerCount;
-    if (timerCount >= 0) {
-      // Tests if win condition is met
-      if (isWin && timerCount > 0) {
-        // Clears interval and stops timer
-        clearInterval(timer);
-        winGame();
-      }
-    }
-    // Tests if time has run out
-    if (timerCount === 0) {
-      // Clears interval
-      clearInterval(timer);
-      loseGame();
-    }
-  }, 1000);
-}
+
 
 startBtn.addEventListener("click", startQuiz());
 
